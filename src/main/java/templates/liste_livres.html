@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ 
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Liste des Livres</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+ 
+<body>
+    <div class="container my-3">
+    <div class="card">
+    <div class="card-body">
+        <div th:switch="${listlivres}" class="container my-5">
+            <p class="my-6">
+                <a href="/addlivre" class="btn btn-primary">
+                <i class="fas fa-user-plus ml-2">Ajouter livre </i>
+                </a>
+            </p>
+            <div class="col-md-12">
+                <h3 th:case="null"> Liste Vide !!</h2>
+                <div th:case="*">
+                    <table class="table table-striped table-responsive-md">
+                        <thead>
+                            <tr>
+                                <th>referance</th>
+                                <th>date_empruntelivre</th>
+                                <th>Modifier Livre</th>
+                                <th>Supprimer Livre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="livre : ${listlivres}">
+                                <td th:text="${livre.referance}"></td>
+                                <td th:text="${livre.date_empruntelivre}"></td>
+                                <td>
+                                    <a th:href="@{/edit/{id}(id=${livre.id})}"
+                                             class="btn btn-primary">
+                                        <i class="fas fa-user-edit ml-2"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a th:href="@{/delete/{id}(id=${livre.id})}"
+                                              class="btn btn-primary">
+                                        <i class="fas fa-user-times ml-2"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+ 
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</body>
+ 
+</html>
